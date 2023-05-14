@@ -1,0 +1,24 @@
+.polymer-form {
+  &__block {
+    display: flex;
+    justify-content: space-between;
+
+    > tui-input {
+      width: 350px;
+    }
+  }
+
+  &__button {
+    display: block;
+    margin: 0 auto;
+    width: 300px;
+  }
+
+  &__img {
+    margin: 0 auto;
+    width: 200px;
+    height: 200px;
+    border-radius: var(--tui-radius-m);
+  }
+
+}

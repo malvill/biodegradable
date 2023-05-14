@@ -1,0 +1,44 @@
+<div class="polymer-card">
+  <div class="polymer-card__content">
+    <div class="polymer-card__left">
+      <h4 class="polymer-card__title tui-text_h4">{{polymerData.name}}</h4>
+      <h5 class="polymer-card__subtitle tui-text_body-l">{{polymerData.iupacName}}</h5>
+      <img class="polymer-card__img" src="{{'data:image/jpg;base64,' + polymerData.polymerUnitImg}}">
+    </div>
+    <div>
+      <p class="tui-text_body-xl">Организмы для биодеградации:</p>
+      <tui-hosted-dropdown
+        tuiDropdownHover
+        [content]="content"
+        *ngFor="let organism of polymerData.biodegradation"
+      >
+        <p tuiHostedDropdownHost class="tui-text_body-m-2 polymer-card__microorganism">
+          {{ organism.microorganism }}
+        </p>
+        <ng-template #content>
+          <p>Источники:</p>
+          <ul>
+            <li *ngFor="let resource of organism.references">
+              <p>{{ resource }}</p>
+            </li>
+          </ul>
+          <p>{{ organism.comment }}</p>
+        </ng-template>
+      </tui-hosted-dropdown>
+    </div>
+    <button class="polymer-card__edit-btn" tuiButton icon="tuiIconEditLarge" (click)="editPolymer()"></button>
+  </div>
+  <button
+    class="polymer-card__button"
+    tuiButton
+    type="button"
+    (click)="toggle()"
+  >
+    {{ expanded ? 'скрыть' : 'показать больше'}}
+  </button>
+  <tui-expand [expanded]="expanded">
+    <ng-template tuiExpandContent>
+      <p>NOBODY expects the Spanish Inquisition!</p>
+    </ng-template>
+  </tui-expand>
+</div>

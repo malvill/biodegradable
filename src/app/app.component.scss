@@ -1,0 +1,13 @@
+.content {
+  margin: 0 100px;
+  height: 100%;
+  border: 1px greenyellow solid;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 30px 40px;
+  background: var(--tui-base-03);
+}

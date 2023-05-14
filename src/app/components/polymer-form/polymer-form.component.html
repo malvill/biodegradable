@@ -1,0 +1,94 @@
+<form [formGroup]="form">
+  <div class="tui-space_bottom-4 polymer-form__block">
+    <tui-input formControlName="name">
+      Название
+      <input tuiTextfield type="text"/>
+    </tui-input>
+    <tui-input formControlName="iupacName">
+      Название IUPAC
+      <input tuiTextfield type="text"/>
+    </tui-input>
+  </div>
+
+  <div class="polymer-form__img" [ngStyle]="{ 'background-image':'url('+ 'data:image/jpg;base64,' + this.form.get('polymerUnitImg')?.value +')', 'background-size': '200px 200px'}"></div>
+
+  <tui-input-files
+    *ngIf="!imgFileControl.value"
+    accept="image/*"
+    [link]="'Загрузите изображение элементарного звена полимера'"
+    [label]="'lalal'"
+    [formControl]="imgFileControl"
+    (reject)="onReject($event)"
+  ></tui-input-files>
+
+  <tui-files class="tui-space_bottom-4">
+    <tui-file
+      *ngIf="loadedFiles$ | async as file"
+      [file]="file"
+      [showDelete]="imgFileControl.enabled"
+      (removed)="removeFile()"
+    ></tui-file>
+
+    <tui-file
+      *ngIf="rejectedFiles$ | async as file"
+      state="error"
+      [file]="file"
+      [showDelete]="imgFileControl.enabled"
+      (removed)="clearRejected()"
+    ></tui-file>
+
+    <tui-file
+      *ngIf="loadingFiles$ | async as file"
+      state="loading"
+      [file]="file"
+      [showDelete]="imgFileControl.enabled"
+    ></tui-file>
+  </tui-files>
+
+  <div>
+    <div formArrayName="biodegradation">
+      <ng-container *ngFor="let biodegradationInfo of biodegradationControls.controls; let i = index" [formGroupName]="i">
+        <tui-input formControlName="microorganism">
+          Организм
+          <input
+            tuiTextfield
+            type="text"
+          />
+        </tui-input>
+        <ng-container formArrayName="references">
+          <tui-input *ngFor="let reference of getControls(biodegradationInfo).controls; let j = index" [formGroupName]="j">
+            Источник {{j + 1}}
+            <input
+              tuiTextfield
+              type="text"
+            />
+          </tui-input>
+        </ng-container>
+        <tui-input formControlName="comment">
+          Комментарий
+          <input
+            tuiTextfield
+            type="text"
+          />
+        </tui-input>
+      </ng-container>
+    </div>
+    <button tuiButton icon="tuiIconPlusCircle" (click)="addBiodegradationFormGroup()"></button>
+  </div>
+  <tui-text-area class="tui-space_bottom-4" formControlName="production">Получение</tui-text-area>
+  <tui-text-area class="tui-space_bottom-4" formControlName="properties">Свойства</tui-text-area>
+  <tui-text-area class="tui-space_bottom-4" formControlName="toxicity">Токсичность</tui-text-area>
+  <tui-text-area class="tui-space_bottom-4" formControlName="applications">Области применения</tui-text-area>
+  <button
+    class="polymer-form__button"
+    tuiButton
+    [disabled]="!form.valid"
+    type="button"
+    size="m"
+    (click)="submit()"
+  >
+    сохранить полимер
+  </button>
+</form>
+
+

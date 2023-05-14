@@ -1,0 +1,46 @@
+.polymer-card {
+  border: 1px black solid;
+  padding: 20px 30px;
+  border-radius: var(--tui-radius-m);
+  display: flex;
+  flex-direction: column;
+  margin: 30px;
+
+  &__left {
+    margin-right: 40px;
+  }
+
+  &__content {
+    display: flex;
+  }
+
+  &__title {
+    margin: 0;
+  }
+
+  &__subtitle {
+    margin-top: 0;
+    margin-bottom: 2rem;
+  }
+
+  &__img {
+    width: 250px;
+    height: 250px;
+  }
+
+  &__microorganism {
+    background: var(--tui-support-19);
+    border-radius: var(--tui-radius-m);
+    padding: 10px 5px;
+    margin-right: 10px;
+  }
+
+  &__button {
+    margin: 0 auto
+  }
+
+  &__edit-btn {
+    margin-right: 0;
+    margin-left: auto;
+  }
+}
